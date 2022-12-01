@@ -1,16 +1,100 @@
-<div class="profile"><img src="./profile.png" alt="default user">
+<div class="profile">
+  <form [formGroup]="form" (ngSubmit)="saveProfile()">
+    <img src="./profile.png" alt="default user" />
     <h3>User Info:</h3>
     <div class="flex">
-        <p>Username: </p>
-        <p>Johny</p>
+      <p>Username:</p>
+      <p>
+        <ng-container *ngIf="showEditMode">
+          <input type="text" *ngIf="showEditMode" formControlName="username" />
+          <p
+            class="error"
+            *ngIf="form.get('username')?.touched || formSubmitted && form.get('username')?.errors?.['required']"
+          >
+            Username is required!
+          </p>
+          <p
+            class="error"
+            *ngIf="form.get('username')?.touched || formSubmitted &&  form.get('username')?.errors?.['minlength']"
+          >
+            Username must be at least 5 characters!
+          </p>
+        </ng-container>
+        <ng-container *ngIf="!showEditMode">
+          {{ user.username }}
+        </ng-container>
+      </p>
     </div>
     <div class="flex">
-        <p>Email: </p>
-        <p>john.doe@gmail.com</p>
+      <p>Email:</p>
+      <p>
+        <ng-container *ngIf="showEditMode">
+          <input type="text" *ngIf="showEditMode" formControlName="email" />
+          <ng-container *ngIf="form.get('email')?.touched || formSubmitted">
+            <p class="error" *ngIf="form.get('email')?.errors?.['required']">
+              Email is required!
+            </p>
+            <p
+              class="error"
+              *ngIf="form.get('email')?.errors?.['appEmailValidator']"
+            >
+              Email is not valid!
+            </p>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!showEditMode">
+          {{ user.email }}
+        </ng-container>
+      </p>
     </div>
     <div class="flex">
-        <p>Phone: </p>
-        <p>+359 885 888 888</p>
+      <p>Phone:</p>
+      <p>
+        <ng-container *ngIf="showEditMode">
+          <label for="tel"
+            ><span><i class="fas fa-phone"></i></span
+          ></label>
+          <select
+            name="select-tel"
+            id="select-tel"
+            class="tel"
+            formControlName="ext"
+            ngModel="00359"
+          >
+            <option value="00359">+359</option>
+            <option value="00358">+358</option>
+          </select>
+          <input
+            type="text"
+            id="tel"
+            placeholder="885 888 888"
+            formControlName="tel"
+          />
+        </ng-container>
+        <ng-container *ngIf="!showEditMode">
+          {{ user.ext }} {{ user.tel }}
+        </ng-container>
+      </p>
     </div>
-    <button class="edit-button">Edit</button>
+    <ng-template #edit>
+      <button class="edit-button" type="submit">Save</button>
+    </ng-template>
+    <ng-template #nonEdit>
+      <button class="edit-button" type="button" (click)="toogleEditMode()">
+        Edit
+      </button>
+    </ng-template>
+    <!-- <button
+      class="edit-button"
+      (click)="showEditMode ? undefined : toogleEditMode()"
+      [type]="showEditMode ? 'submit' : 'button'"
+    >
+      <ng-container *ngIf="showEditMode"> Save </ng-container>
+      <ng-container *ngIf="!showEditMode"> Edit </ng-container>
+    </button> -->
+
+    <ng-container
+      *ngTemplateOutlet="showEditMode ? edit : nonEdit"
+    ></ng-container>
+  </form>
 </div>

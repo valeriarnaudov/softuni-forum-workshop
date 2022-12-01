@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class NewThemeComponent {
 
+  constructor () {}
+
+  newThemeHandler(form: NgForm): void {
+    if (form.invalid) {
+      return;
+    }
+  }
 }
