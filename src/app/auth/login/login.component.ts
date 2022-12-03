@@ -10,16 +10,16 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-
-  appEmailDomains = appEmailDomains
+  appEmailDomains = appEmailDomains;
 
   // @ViewChild('files', { static: true }) files!: ElementRef<HTMLInputElement>;
 
   @ViewChild(
-    // 'form', 
+    // 'form',
     NgForm,
-    { static: true }) 
-    form!: ElementRef<HTMLInputElement>;
+    { static: true }
+  )
+  form!: ElementRef<HTMLInputElement>;
 
   constructor(
     private activatedRouted: ActivatedRoute,
@@ -30,15 +30,23 @@ export class LoginComponent {
   loginHandler(form: NgForm): void {
     // console.log(this.files.nativeElement.files);
 
-    if (form.invalid) { return; }
+    // if (form.invalid) { return; }
 
-    this.authService.user = {
-      username: 'John',
-    } as any;
+    // this.authService.user = {
+    //   username: 'John',
+    // } as any;
 
-    const returnUrl =
-      this.activatedRouted.snapshot.queryParams['returnUrl'] || '/';
+    // const returnUrl =
+    //   this.activatedRouted.snapshot.queryParams['returnUrl'] || '/';
 
-    this.router.navigate([returnUrl]);
+    // this.router.navigate([returnUrl]);
+
+    if (form.invalid) {
+      return;
+    }
+    const { email, password } = form.value;
+    this.authService.login(email!, password!).subscribe((user) => {
+      this.router.navigate(['/theme/recent']);
+    });
   }
 }
