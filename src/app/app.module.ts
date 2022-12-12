@@ -1,3 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
+import { API_ERROR } from './shared/constants';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -17,15 +19,16 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     AuthenticateComponent,
   ],
   imports: [
-    ThemeModule,
-    AuthModule,
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
     SharedModule,
   ],
-  providers: [appInterceptorProvider],
+  providers: [appInterceptorProvider, {
+    provide: API_ERROR,
+    useValue: new BehaviorSubject(null)
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+import { ErrorComponent } from './error/error.component';
 import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,8 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    ErrorComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    ErrorComponent
   ]
 })
 export class CoreModule { }

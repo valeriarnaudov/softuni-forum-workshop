@@ -38,7 +38,9 @@ export class ProfileComponent {
 
   toogleEditMode(): void {
     this.showEditMode = !this.showEditMode;
-    this.formSubmitted = false;
+    if (this.showEditMode) {
+      this.formSubmitted = false;
+    }
   }
 
   saveProfile(): void {
@@ -50,12 +52,10 @@ export class ProfileComponent {
 
     const { username, email, ext, tel } = this.form.value;
 
-    this.authService.user = {
-      username,
-      email,
-      tel: ext + ' ' + tel,
-    } as any;
-
-    this.toogleEditMode();
+    this.authService
+      .setProfile(username as any, email as any, ext + ' ' + tel)
+      .subscribe(() => {
+        this.toogleEditMode();
+      });
   }
 }

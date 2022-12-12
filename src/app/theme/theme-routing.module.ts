@@ -6,26 +6,21 @@ import { ThemeResolver } from './resolvers/theme.resolver';
 
 const routes: Routes = [
   {
-    path: 'theme',
-    children: [
-      {
-        path: 'recent',
-        component: MainComponent,
-      },
-      {
-        path: 'new',
-        component: NewThemeComponent,
-        data: { title: 'New theme' },
-      },
-      {
-        path: 'detail/:id',
-        component: ThemeDetailComponent,
-        data: { title: 'Theme detail' },
-        resolve: {
-          theme: ThemeResolver,
-        },
-      },
-    ],
+    path: 'recent',
+    component: MainComponent,
+  },
+  {
+    path: 'new',
+    component: NewThemeComponent,
+    data: { title: 'New theme' },
+  },
+  {
+    path: 'detail/:id',
+    component: ThemeDetailComponent,
+    data: { title: 'Theme detail' },
+    resolve: {
+      theme: ThemeResolver,
+    },
   },
 ];
 

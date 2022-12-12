@@ -7,25 +7,25 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
-    path: 'auth/login',
+    path: 'login',
     component: LoginComponent,
     canActivate: [AuthActivate],
     data: { title: 'Login', loginRequired: false },
   },
   {
-    path: 'auth/register',
+    path: 'register',
     component: RegisterComponent,
     canActivate: [AuthActivate],
     data: { title: 'Register', loginRequired: false },
   },
   {
-    path: 'auth/logout',
+    path: 'logout',
     component: LogoutComponent,
     canActivate: [AuthActivate],
     data: { title: 'Logout', loginRequired: true },
   },
   {
-    path: 'auth/profile',
+    path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthActivate],
     data: { title: 'Profile', loginRequired: true },

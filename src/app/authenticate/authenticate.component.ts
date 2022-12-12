@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./authenticate.component.scss'],
 })
 export class AuthenticateComponent implements OnInit {
-
   isAuthenticating = true;
 
   constructor(private authService: AuthService) {}
@@ -15,11 +14,9 @@ export class AuthenticateComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
       next: (user) => {
-        this.authService.user = user;
-        this.isAuthenticating = false
+        this.isAuthenticating = false;
       },
       error: () => {
-        this.authService.user = null;
         this.isAuthenticating = false;
       },
     });
